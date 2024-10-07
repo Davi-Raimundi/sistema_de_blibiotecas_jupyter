@@ -1,0 +1,23 @@
+Sistema de Empréstimos de Livros
+
+Descrição:
+
+O Sistema de Empréstimos de Livros é uma aplicação desenvolvida em Python utilizando a biblioteca Tkinter. Este sistema permite gerenciar livros, autores e empréstimos de maneira eficiente e amigável. Os usuários podem adicionar novos livros e autores, registrar empréstimos, visualizar informações relevantes e realizar buscas.
+
+Objetivos:
+
+Criar uma interface gráfica que facilite a interação com o sistema.
+Permitir a inclusão de novos livros, autores e registros de empréstimos.
+Fornecer funcionalidades de busca para localizar livros e autores rapidamente.
+Implementar a possibilidade de exclusão de registros, garantindo a flexibilidade de gestão dos dados.
+Funcionalidades Principais:
+
+Adicionar Livros: Insira detalhes como título, gênero e data de lançamento.
+Adicionar Autores: Registre informações como nome, nacionalidade e data de nascimento.
+Registrar Empréstimos: Permita que os usuários registrem empréstimos de livros, incluindo informações do usuário e do livro.
+Visualizar e Buscar: Ofereça a capacidade de visualizar listas de livros, autores e empréstimos, além de funcionalidades de busca.
+Excluir Registros: Permita a exclusão de livros, autores e empréstimos com base em identificadores únicos.
+Tecnologias Utilizadas:
+
+Python 3.x
+Tkinter (para a interface gráfica)
