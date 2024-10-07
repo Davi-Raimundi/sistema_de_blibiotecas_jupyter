@@ -1,0 +1,240 @@
+import tkinter as tk
+from tkinter import messagebox
+
+# Dados de exemplo (você pode adicionar mais)
+livros = []
+autores = []
+emprestimos = []
+
+# Funções de manipulação de dados
+def add_emprestimo():
+    nome_usuario = entry_nome_usuario.get()
+    livro = entry_livro.get()
+    data_retirada = entry_data_retirada.get()
+    data_entrega = entry_data_entrega.get()
+    email = entry_email.get()
+    whatsapp = entry_whatsapp.get()
+
+    if nome_usuario and livro and data_retirada and data_entrega and email and whatsapp:
+        emprestimos.append((nome_usuario, livro, data_retirada, data_entrega, email, whatsapp))
+        messagebox.showinfo("Sucesso", f"Empréstimo adicionado para {nome_usuario}.\nLivro: {livro}\nData de Retirada: {data_retirada}\nData de Entrega: {data_entrega}\nEmail: {email}\nWhatsApp: {whatsapp}")
+        # Limpar os campos após adicionar
+        entry_nome_usuario.delete(0, tk.END)
+        entry_livro.delete(0, tk.END)
+        entry_data_retirada.delete(0, tk.END)
+        entry_data_entrega.delete(0, tk.END)
+        entry_email.delete(0, tk.END)
+        entry_whatsapp.delete(0, tk.END)
+    else:
+        messagebox.showwarning("Atenção", "Todos os campos devem ser preenchidos.")
+
+def add_autor():
+    nome_autor = entry_nome_autor.get()
+    nacionalidade = entry_nacionalidade.get()
+    data_nascimento = entry_data_nascimento.get()
+
+    if nome_autor and nacionalidade and data_nascimento:
+        autores.append((nome_autor, nacionalidade, data_nascimento))
+        messagebox.showinfo("Sucesso", f"Autor adicionado: {nome_autor}\nNacionalidade: {nacionalidade}\nData de Nascimento: {data_nascimento}")
+        # Limpar os campos após adicionar
+        entry_nome_autor.delete(0, tk.END)
+        entry_nacionalidade.delete(0, tk.END)
+        entry_data_nascimento.delete(0, tk.END())
+    else:
+        messagebox.showwarning("Atenção", "Todos os campos devem ser preenchidos.")
+
+def add_livro():
+    livro = entry_novo_livro.get()
+    genero = entry_genero.get()
+    data_lancamento = entry_data_lancamento.get()
+
+    if livro and genero and data_lancamento:
+        livros.append((livro, genero, data_lancamento))
+        messagebox.showinfo("Sucesso", f"Livro adicionado: {livro}\nGênero: {genero}\nData de Lançamento: {data_lancamento}")
+        # Limpar os campos após adicionar
+        entry_novo_livro.delete(0, tk.END)
+        entry_genero.delete(0, tk.END)
+        entry_data_lancamento.delete(0, tk.END)
+    else:
+        messagebox.showwarning("Atenção", "Todos os campos devem ser preenchidos.")
+
+def view_livros():
+    livros_list.delete(0, tk.END)
+    for livro in livros:
+        livros_list.insert(tk.END, f"{livro[0]} - {livro[1]} ({livro[2]})")
+
+def search_livros():
+    termo = entry_search_livro.get().lower()
+    livros_list.delete(0, tk.END)
+    for livro in livros:
+        if termo in livro[0].lower() or termo in livro[1].lower():
+            livros_list.insert(tk.END, f"{livro[0]} - {livro[1]} ({livro[2]})")
+
+def view_emprestimos():
+    emprestimos_list.delete(0, tk.END)
+    for emprestimo in emprestimos:
+        emprestimos_list.insert(tk.END, f"Usuário: {emprestimo[0]} | Livro: {emprestimo[1]} | Data Retirada: {emprestimo[2]} | Data Entrega: {emprestimo[3]}")
+
+def search_emprestimos():
+    termo = entry_search_emprestimo.get().lower()
+    emprestimos_list.delete(0, tk.END)
+    for emprestimo in emprestimos:
+        if termo in emprestimo[0].lower() or termo in emprestimo[1].lower():
+            emprestimos_list.insert(tk.END, f"Usuário: {emprestimo[0]} | Livro: {emprestimo[1]} | Data Retirada: {emprestimo[2]} | Data Entrega: {emprestimo[3]}")
+
+def delete_autor():
+    autor_id = entry_delete_autor.get()
+    if autor_id:
+        messagebox.showinfo("Sucesso", f"Autor com ID {autor_id} excluído.")
+    else:
+        messagebox.showwarning("Atenção", "ID do autor não pode estar vazio.")
+
+def delete_livro():
+    livro_id = entry_delete_livro.get()
+    if livro_id:
+        messagebox.showinfo("Sucesso", f"Livro com ID {livro_id} excluído.")
+    else:
+        messagebox.showwarning("Atenção", "ID do livro não pode estar vazio.")
+
+def delete_emprestimo():
+    emprestimo_id = entry_delete_emprestimo.get()
+    if emprestimo_id:
+        messagebox.showinfo("Sucesso", f"Empréstimo com ID {emprestimo_id} excluído.")
+    else:
+        messagebox.showwarning("Atenção", "ID do empréstimo não pode estar vazio.")
+
+def search_autores():
+    termo = entry_search_autor.get().lower()
+    autores_list.delete(0, tk.END)
+    for autor in autores:
+        if termo in autor[0].lower():
+            autores_list.insert(tk.END, f"{autor[0]} - {autor[1]} ({autor[2]})")
+
+# Inicializa a janela principal
+root = tk.Tk()
+root.title("Sistema de Empréstimos")
+
+# Frame para adicionar empréstimos
+frame_emprestimo = tk.LabelFrame(root, text='Adicionar Empréstimos')
+frame_emprestimo.grid(row=0, column=0, padx=10, pady=10)
+
+tk.Label(frame_emprestimo, text='Nome do Usuário:').grid(row=0, column=0)
+entry_nome_usuario = tk.Entry(frame_emprestimo)
+entry_nome_usuario.grid(row=0, column=1)
+
+tk.Label(frame_emprestimo, text='Livro:').grid(row=1, column=0)
+entry_livro = tk.Entry(frame_emprestimo)
+entry_livro.grid(row=1, column=1)
+
+tk.Label(frame_emprestimo, text='Data de Retirada:').grid(row=2, column=0)
+entry_data_retirada = tk.Entry(frame_emprestimo)
+entry_data_retirada.grid(row=2, column=1)
+
+tk.Label(frame_emprestimo, text='Data de Entrega:').grid(row=3, column=0)
+entry_data_entrega = tk.Entry(frame_emprestimo)
+entry_data_entrega.grid(row=3, column=1)
+
+tk.Label(frame_emprestimo, text='Email:').grid(row=4, column=0)
+entry_email = tk.Entry(frame_emprestimo)
+entry_email.grid(row=4, column=1)
+
+tk.Label(frame_emprestimo, text='WhatsApp:').grid(row=5, column=0)
+entry_whatsapp = tk.Entry(frame_emprestimo)
+entry_whatsapp.grid(row=5, column=1)
+
+tk.Button(frame_emprestimo, text='Adicionar Empréstimo', command=add_emprestimo).grid(row=6, columnspan=2, pady=5)
+
+# Frame para adicionar autores
+frame_autor = tk.LabelFrame(root, text='Adicionar Autores')
+frame_autor.grid(row=1, column=0, padx=10, pady=10)
+
+tk.Label(frame_autor, text='Nome do Autor:').grid(row=0, column=0)
+entry_nome_autor = tk.Entry(frame_autor)
+entry_nome_autor.grid(row=0, column=1)
+
+tk.Label(frame_autor, text='Nacionalidade:').grid(row=1, column=0)
+entry_nacionalidade = tk.Entry(frame_autor)
+entry_nacionalidade.grid(row=1, column=1)
+
+tk.Label(frame_autor, text='Data de Nascimento:').grid(row=2, column=0)
+entry_data_nascimento = tk.Entry(frame_autor)
+entry_data_nascimento.grid(row=2, column=1)
+
+tk.Button(frame_autor, text='Adicionar Autor', command=add_autor).grid(row=3, columnspan=2, pady=5)
+
+# Frame para adicionar livros
+frame_livro = tk.LabelFrame(root, text='Adicionar Livros')
+frame_livro.grid(row=2, column=0, padx=10, pady=10)
+
+tk.Label(frame_livro, text='Livro:').grid(row=0, column=0)
+entry_novo_livro = tk.Entry(frame_livro)
+entry_novo_livro.grid(row=0, column=1)
+
+tk.Label(frame_livro, text='Gênero:').grid(row=1, column=0)
+entry_genero = tk.Entry(frame_livro)
+entry_genero.grid(row=1, column=1)
+
+tk.Label(frame_livro, text='Data de Lançamento:').grid(row=2, column=0)
+entry_data_lancamento = tk.Entry(frame_livro)
+entry_data_lancamento.grid(row=2, column=1)
+
+tk.Button(frame_livro, text='Adicionar Livro', command=add_livro).grid(row=3, columnspan=2, pady=5)
+
+# Frame para visualizar e buscar dados
+frame_visualizar = tk.LabelFrame(root, text='Visualizar e Buscar Dados')
+frame_visualizar.grid(row=0, column=1, rowspan=3, padx=10, pady=10)
+
+# Lista para mostrar os livros
+livros_list = tk.Listbox(frame_visualizar, height=10, width=50)
+livros_list.grid(row=0, column=0)
+tk.Button(frame_visualizar, text='Visualizar Livros', command=view_livros).grid(row=1, column=0)
+
+# Campo de busca para livros
+entry_search_livro = tk.Entry(frame_visualizar)
+entry_search_livro.grid(row=2, column=0)
+tk.Button(frame_visualizar, text='Buscar Livros', command=search_livros).grid(row=3, column=0)
+
+# Lista para mostrar os empréstimos
+emprestimos_list = tk.Listbox(frame_visualizar, height=10, width=50)
+emprestimos_list.grid(row=4, column=0)
+tk.Button(frame_visualizar, text='Visualizar Empréstimos', command=view_emprestimos).grid(row=5, column=0)
+
+# Campo de busca para empréstimos
+entry_search_emprestimo = tk.Entry(frame_visualizar)
+entry_search_emprestimo.grid(row=6, column=0)
+tk.Button(frame_visualizar, text='Buscar Empréstimos', command=search_emprestimos).grid(row=7, column=0)
+
+# Lista para mostrar os autores
+autores_list = tk.Listbox(frame_visualizar, height=10, width=50)
+autores_list.grid(row=8, column=0)
+tk.Button(frame_visualizar, text='Visualizar Autores', command=lambda: None).grid(row=9, column=0)
+
+# Campo de busca para autores
+entry_search_autor = tk.Entry(frame_visualizar)
+entry_search_autor.grid(row=10, column=0)
+tk.Button(frame_visualizar, text='Buscar Autores', command=search_autores).grid(row=11, column=0)
+
+# Frame para excluir dados
+frame_excluir = tk.LabelFrame(root, text='Excluir Dados')
+frame_excluir.grid(row=3, column=0, padx=10, pady=10)
+
+tk.Label(frame_excluir, text='ID do Autor:').grid(row=0, column=0)
+entry_delete_autor = tk.Entry(frame_excluir)
+entry_delete_autor.grid(row=0, column=1)
+
+tk.Button(frame_excluir, text='Excluir Autor', command=delete_autor).grid(row=1, columnspan=2, pady=5)
+
+tk.Label(frame_excluir, text='ID do Livro:').grid(row=2, column=0)
+entry_delete_livro = tk.Entry(frame_excluir)
+entry_delete_livro.grid(row=2, column=1)
+
+tk.Button(frame_excluir, text='Excluir Livro', command=delete_livro).grid(row=3, columnspan=2, pady=5)
+
+tk.Label(frame_excluir, text='ID do Empréstimo:').grid(row=4, column=0)
+entry_delete_emprestimo = tk.Entry(frame_excluir)
+entry_delete_emprestimo.grid(row=4, column=1)
+
+tk.Button(frame_excluir, text='Excluir Empréstimo', command=delete_emprestimo).grid(row=5, columnspan=2, pady=5)
+
+# Inicia o loop da interface
+root.mainloop()
