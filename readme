@@ -1,0 +1,17 @@
+# Sistema de Empréstimos
+
+Este projeto é um sistema de empréstimos para gerenciar livros, autores e empréstimos de forma simples e intuitiva. Desenvolvido em Python utilizando a biblioteca Tkinter para a interface gráfica.
+
+## Funcionalidades
+
+- Adicionar, visualizar e buscar livros.
+- Adicionar, visualizar e buscar autores.
+- Registrar e visualizar empréstimos de livros.
+- Excluir livros, autores e empréstimos.
+
+## Como Usar
+
+1. Clone o repositório:
+   bash
+   git clone https://github.com/seu_usuario/sistema-de-emprestimos.git
+   cd sistema-de-emprestimos
